@@ -1,4 +1,5 @@
 from zipCode import getWeather
+from zipCode import checkZips
 from flask import Flask, jsonify, request 
   
 app = Flask(__name__) 
@@ -8,9 +9,13 @@ app = Flask(__name__)
 def helloworld(): 
     if(request.method == 'GET'): 
         args = request.args
-        queryZip = args['zip']
-        data = getWeather(queryZip)
-        return jsonify(data) 
+        if len(args) > 0:
+            queryZip = args['zip']
+            data = getWeather(queryZip)
+            return jsonify(data) 
+        else:
+            data = checkZips()
+            return jsonify(data)
   
   
 if __name__ == '__main__': 

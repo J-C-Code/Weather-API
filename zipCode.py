@@ -23,19 +23,29 @@ def add_zip_to_db(zip_code, city):
     conn.commit()
     conn.close()
 
+def get_db_zips():
+    conn = connect_to_db()
+    cur = conn.cursor()
+    postgreSQL_select_Query = "SELECT * FROM public.zip_codes"
+    cur.execute(postgreSQL_select_Query)
+    records = cur.fetchall()
+    conn.commit()
+    conn.close()
+    return(records)
 
 def main():
-    if len(sys.argv) < 2:
-        print("Not enough arguments")
-    elif len(sys.argv) > 2:
-        print("Too many arguments")
-    elif not sys.argv[-1].isdigit():
-        print("User did not enter zip code properly")
-    else:
-        data = getWeather(sys.argv[-1])
-        city = data["city"]
-        temperature = data["temperature"]
-        print(f"It is currently {temperature} degrees in {city}")
+    print()
+    # if len(sys.argv) < 2:
+    #     print("Not enough arguments")
+    # elif len(sys.argv) > 2:
+    #     print("Too many arguments")
+    # elif not sys.argv[-1].isdigit():
+    #     print("User did not enter zip code properly")
+    # else:
+    #     data = getWeather(sys.argv[-1])
+    #     city = data["city"]
+    #     temperature = data["temperature"]
+    #     print(f"It is currently {temperature} degrees in {city}")
 
 
 def getWeather(zipCode):
@@ -52,6 +62,9 @@ def getWeather(zipCode):
     add_zip_to_db(zipCode, city)
     return returnInfo
 
+
+def checkZips():
+    return get_db_zips()
 
 if __name__ == "__main__":
     main()
