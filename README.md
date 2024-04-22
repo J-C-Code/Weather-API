@@ -1,1 +1,1 @@
-# Get Weather Information bases on zip code anywhere in the US
+# Get Weather Information based on zip code anywhere in the US
