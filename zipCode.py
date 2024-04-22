@@ -34,18 +34,17 @@ def get_db_zips():
     return(records)
 
 def main():
-    print()
-    # if len(sys.argv) < 2:
-    #     print("Not enough arguments")
-    # elif len(sys.argv) > 2:
-    #     print("Too many arguments")
-    # elif not sys.argv[-1].isdigit():
-    #     print("User did not enter zip code properly")
-    # else:
-    #     data = getWeather(sys.argv[-1])
-    #     city = data["city"]
-    #     temperature = data["temperature"]
-    #     print(f"It is currently {temperature} degrees in {city}")
+    if len(sys.argv) < 2:
+        print("Not enough arguments")
+    elif len(sys.argv) > 2:
+        print("Too many arguments")
+    elif not sys.argv[-1].isdigit():
+        print("User did not enter zip code properly")
+    else:
+        data = getWeather(sys.argv[-1])
+        city = data["city"]
+        temperature = data["temperature"]
+        print(f"It is currently {temperature} degrees in {city}")
 
 
 def getWeather(zipCode):
