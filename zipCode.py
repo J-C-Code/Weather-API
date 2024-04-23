@@ -1,9 +1,8 @@
 import requests
 import sys
-from secretToken import apiKey, dbUser, dbPassword
+from secretToken import apiKey
 import json
-import psycopg2
-
+# import psycopg2
 
 # Function to connect to the PostgreSQL database
 def connect_to_db():
@@ -67,12 +66,8 @@ def getWeather(zipCode):
     city = weatherData["name"]
     # Creates object, which we then return from called function.
     returnInfo = {"city": city, "temperature": temperature}
-    add_zip_to_db(zipCode, city)
+    # add_zip_to_db(zipCode, city)
     return returnInfo
-
-
-
-
 
 if __name__ == "__main__":
     main()

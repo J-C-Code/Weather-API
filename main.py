@@ -11,7 +11,7 @@ def helloworld():
         args = request.args
         print(len(args))
         if len(args) > 1:
-            return "Record not found", 400
+            return "Request malformed: too many query parameters", 400
         if len(args) > 0:
             queryZip = args['zip']
             data = getWeather(queryZip)
