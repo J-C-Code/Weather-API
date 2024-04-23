@@ -8,20 +8,38 @@ import psycopg2
 # Function to connect to the PostgreSQL database
 def connect_to_db():
     conn = psycopg2.connect(
-        dbname="Zips",
-        user=dbUser,
-        password=dbPassword,
-        host="localhost"
+        dbname="Zips", user=dbUser, password=dbPassword, host="localhost"
     )
     return conn
+
 
 # Function to insert zip code into the database
 def add_zip_to_db(zip_code, city):
     conn = connect_to_db()
     cur = conn.cursor()
-    cur.execute('INSERT INTO zip_codes ("ZipCode", \"City Name\") VALUES (%s, %s)', (zip_code, city))
+    postgreSQL_select_Query = "SELECT * FROM public.zip_codes"
+    cur.execute(postgreSQL_select_Query)
+    records = cur.fetchall()
+    try:
+        cur.execute(
+            'INSERT INTO zip_codes ("ZipCode", "City Name") VALUES (%s, %s)',
+            (zip_code, city),
+        )
+        conn.commit()
+        conn.close()
+    except psycopg2.errors.UniqueViolation:
+        print()
+
+
+def get_db_zips():
+    conn = connect_to_db()
+    cur = conn.cursor()
+    postgreSQL_select_Query = "SELECT * FROM public.zip_codes"
+    cur.execute(postgreSQL_select_Query)
+    records = cur.fetchall()
     conn.commit()
     conn.close()
+    return records
 
 
 def main():
@@ -51,6 +69,9 @@ def getWeather(zipCode):
     returnInfo = {"city": city, "temperature": temperature}
     add_zip_to_db(zipCode, city)
     return returnInfo
+
+
+
 
 
 if __name__ == "__main__":
