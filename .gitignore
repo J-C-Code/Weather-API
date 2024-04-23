@@ -1,1 +1,6 @@
+# Local files
+secretToken.py
+
+# Python
+__pycache__/
 venv/
