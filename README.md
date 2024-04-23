@@ -10,7 +10,7 @@
    ```python
    pip install -r requirements.txt
    ```
-3. Create secrets file (make sure you have an API key from api.openweathermap.org)
+3. Create secrets file (make sure you have an API key from https://api.openweathermap.org)
    ```shell
    export api_key=<your api key>
    echo 'apiKey = "$api_key"' > secretToken.py
