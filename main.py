@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request
   
 app = Flask(__name__) 
   
-  
+  # Route for /weather 
 @app.route('/weather', methods=['GET']) 
 def helloworld(): 
     if(request.method == 'GET'): 
