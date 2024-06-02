@@ -41,7 +41,23 @@ def get_db_zips():
     conn.close()
     return records
 
-
+def get_key(key):
+    conn = None
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
+        select_query = "SELECT 1 FROM public.keys WHERE key = %s"
+        cur.execute(select_query, (key,))
+        result = cur.fetchone()
+        cur.close()
+        return result is not None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+            
 def main():
     if len(sys.argv) < 2:
         print("Not enough arguments")
