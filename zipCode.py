@@ -57,6 +57,22 @@ def get_key(key):
     finally:
         if conn:
             conn.close()
+
+def insert_key(key):
+    conn = None
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
+        insert_query = "INSERT INTO public.keys (key) VALUES (%s)"
+        cur.execute(insert_query, (key,))
+        conn.commit()
+        cur.close()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        if conn:
+            conn.close()
+
             
 def main():
     if len(sys.argv) < 2:
