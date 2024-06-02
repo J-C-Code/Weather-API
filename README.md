@@ -15,7 +15,12 @@
    export api_key=<your api key>
    echo 'apiKey = "$api_key"' > secretToken.py
    ```
-4. Now run your app!
+4. Before running your app, you must create a postgres database!
+   * In your secrets file, add a user and password into file after creating database. 
+   * You will need one table for zip codes, and one for keys with the correct columns listed in zipCode.py
+5. Now run your app!
    * Debug: Press `F5` or click the debug icon in your IDE
    * From terminal: Run `python main.py`
-5. API can now be accessed from http://localhost:5000
+6. API can now be accessed from http://localhost:5000/
+7. When using the API, you will notice it requires a zip code **AND** a key. To get a key, do http://localhost:5000/request which will generate a key.
+8. Example of usage: http://localhost:5000/zip=74012&key="KEYHERE" 
