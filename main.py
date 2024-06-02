@@ -1,10 +1,20 @@
-from zipCode import getWeather, get_db_zips, get_key
+from zipCode import getWeather, get_db_zips, get_key, insert_key
 from flask import Flask, jsonify, request 
-  
+import uuid
+
 app = Flask(__name__) 
   
-
-
+  
+# Route to generate a unique key using uuid library
+@app.route('/request', methods=['GET'])
+def generate_key():
+    new_key = str(uuid.uuid4())
+    
+    # Insert the key into the database
+    insert_key(new_key)
+    # Return the key to the user
+    return jsonify({"key": new_key})
+        
 
   # Route for /weather 
 @app.route('/weather', methods=['GET'])
