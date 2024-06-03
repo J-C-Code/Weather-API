@@ -3,7 +3,17 @@ from flask import Flask, jsonify, request
 import uuid
 from flask_swagger_ui import get_swaggerui_blueprint
 app = Flask(__name__) 
-  
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "My Flask Application"
+    }
+)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
 
 # Route to generate a unique key using uuid library
 @app.route('/request', methods=['GET'])
@@ -42,16 +52,6 @@ def get_weather():
         #         dataBaseZips.append(f"{temperature}")
         # return jsonify(dataBaseZips)
         
-SWAGGER_URL = '/swagger'
-API_URL = '/static/swagger.json'
-swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': "My Flask Application"
-    }
-)
-app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
   
 @app.errorhandler(Exception)
 def exception_handler(error):
