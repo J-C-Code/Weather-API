@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Endpoints for users to access API",
+      "version": "1.0.0",
+      "title": "Weather API"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "weather",
+        "description": "Weather operations"
+      }
+    ],
+    "paths": {
+      "/request": {
+        "get": {
+          "tags": ["weather"],
+          "summary": "Generate a new key",
+          "description": "",
+          "operationId": "generateKey",
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/weather": {
+        "get": {
+          "tags": ["weather"],
+          "summary": "Get weather by zip code",
+          "description": "",
+          "operationId": "getWeather",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "key",
+              "in": "query",
+              "description": "API key",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "zip",
+              "in": "query",
+              "description": "Zip code",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "weather": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      }
+    }
+  }
+  
